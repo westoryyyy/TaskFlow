@@ -1,58 +1,42 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🚀 TaskFlow
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Overview
+**TaskFlow** adalah platform manajemen tugas intuitif yang dirancang untuk membantu mahasiswa mengelola beban kerja akademik mereka secara sistematis. Platform ini menyediakan antarmuka *clean design* untuk memantau deadline, mengelompokkan tugas berdasarkan kategori, dan memastikan setiap progres akademik tercatat dengan rapi tanpa distraksi visual yang berlebihan.
 
-## About Laravel
+## Project Objectives
+*   **User-Friendly Interface**: Menyediakan pengalaman pengguna yang fokus pada kemudahan navigasi dan kejernihan informasi.
+*   **Deadline Tracking**: Memastikan mahasiswa tidak melewatkan tugas penting melalui sistem manajemen waktu yang terorganisir.
+*   **Workflow Simplification**: Menyederhanakan proses pencatatan tugas harian menjadi alur kerja yang lebih produktif.
+*   **Visual Consistency**: Menerapkan estetika desain minimalis yang konsisten di seluruh modul aplikasi.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Key Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Management Dashboard
+*   **Task Summary**: Visualisasi ringkasan tugas aktif dalam bentuk card yang informatif.
+*   **Landscape View**: Tata letak yang dioptimalkan untuk kenyamanan pemantauan data dalam skala besar.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Authentication System
+*   **Focus-Oriented Auth**: Halaman login dan daftar yang dirancang minimalis tanpa navbar global untuk mengurangi beban kognitif pengguna.
+*   **Secure Access**: Implementasi proteksi rute menggunakan logika autentikasi untuk menjaga privasi data pengguna.
 
-## Learning Laravel
+### Task Classification
+*   **Categorization**: Pengelompokan tugas berdasarkan mata kuliah atau jenis proyek secara dinamis sesuai skema ERD.
+*   **Status Tracking**: Pemantauan real-time untuk setiap tugas yang sedang berjalan maupun yang sudah selesai.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Technology Stack
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Frontend
+*   **Blade Engine**: Sistem templating Laravel untuk antarmuka yang dinamis.
+*   **Tailwind CSS**: Framework CSS berbasis utility untuk styling yang responsif dan cepat.
+*   **Gilroy Font Family**: Tipografi modern untuk meningkatkan keterbacaan dan estetika profesional.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+### Backend
+*   **Laravel 11**: Framework PHP modern yang kuat untuk logika bisnis dan routing.
+*   **PHP 8.x**: Bahasa pemrograman utama yang digunakan untuk pemrosesan server-side.
+*   **Eloquent ORM**: Pemetaan database yang efisien untuk pengelolaan data tugas dan user sesuai relasi tabel.
 
-## Agentic Development
+### Database & Infrastructure
+*   **MySQL**: Database relasional utama untuk menyimpan data tugas, kategori, dan profil user.
+*   **Git & GitHub**: Version control system untuk kolaborasi tim yang terdokumentasi.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
-```
-
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
