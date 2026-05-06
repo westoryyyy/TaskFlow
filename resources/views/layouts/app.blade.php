@@ -63,7 +63,7 @@
     @endauth
 </nav>
 
-    <!-- Main Content Area dengan Animasi[cite: 1] -->
+    <!-- Main Content Area dengan Animasi -->
     <main class="flex-1 p-6 md:p-12 page-transition">
         {{-- Area ini akan diisi oleh konten dari file dashboard, create, detail, dll --}}
         @yield('content')

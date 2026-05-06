@@ -1,26 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-5xl mx-auto animate-in fade-in duration-700">
-    <div class="flex justify-between items-center mb-10">
+<div class="max-w-6xl mx-auto px-4 py-8 animate-in fade-in duration-700">
+    <div class="flex justify-between items-end mb-10">
         <div>
-            <h2 class="text-3xl font-extrabold text-slate-800">Kategori Tugas</h2>
-            <p class="text-slate-500 mt-1 font-medium">Kelola label untuk organisasi tugas yang lebih baik.</p>
+            <h1 class="text-4xl font-black text-slate-800 tracking-tighter">Kategori Tugas</h1>
+            <p class="text-slate-400 font-medium mt-2">Kelola tugas berdasarkan kelompok aktivitasmu.</p>
         </div>
-        <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg shadow-indigo-100 active:scale-95">
+        <button class="px-6 py-3 bg-slate-900 text-white rounded-2xl font-bold text-sm hover:bg-slate-800 transition-all">
             + Kategori Baru
         </button>
     </div>
 
+    <!-- Grid Kategori -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {{-- Loop Kategori (Ref: nama_kategori char(50)) --}}
-        @foreach(['Akademik', 'Proyek Kelompok', 'Organisasi'] as $cat)
-        <div class="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-md transition-all group">
-            <div class="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center text-xl mb-4 group-hover:bg-indigo-50 transition-colors">
-                🏷️
+        @foreach($categories as $cat)
+        <div class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-slate-200/50 transition-all group cursor-pointer">
+            <div class="w-12 h-12 bg-{{ $cat['color'] }}-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <div class="w-2 h-2 rounded-full bg-{{ $cat['color'] }}-500"></div>
             </div>
-            <h4 class="font-extrabold text-slate-800 text-lg">{{ $cat }}</h4>
-            <p class="text-xs text-slate-400 mt-1 font-bold uppercase tracking-wider">ID: {{ $loop->iteration }}</p>
+            <h3 class="text-xl font-black text-slate-800 mb-1">{{ $cat['nama'] }}</h3>
+            <p class="text-slate-400 font-bold text-[10px] uppercase tracking-widest">{{ $cat['jumlah'] }} Tugas Terdaftar</p>
         </div>
         @endforeach
     </div>

@@ -26,7 +26,7 @@
         </div>
         <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm">
             <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-2">Selesai</p>
-            <h4 class="text-3xl font-black text-emerald-500">08</h4>
+            <h4 class="text-3xl font-black text-emerald-500">09</h4>
         </div>
     </div>
 
