@@ -42,7 +42,7 @@
                     <select name="id_kategori" class="w-full bg-slate-50 border border-slate-100 rounded-2xl p-4 text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all appearance-none">
                         <option value="">Pilih Kategori</option>
                         <option value="1">Akademik</option>
-                        <option value="2">Proyek Kelompok</option>
+                        <option value="2">Organisasi</option>
                     </select>
                 </div>
             </div>

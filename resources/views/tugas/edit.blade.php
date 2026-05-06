@@ -35,7 +35,7 @@
                     <label class="text-[10px] font-black uppercase tracking-widest text-slate-400">Kategori Tugas</label>
                     <select name="kategori" class="w-full bg-slate-50 border-none rounded-2xl p-4 font-bold text-slate-700 focus:ring-2 focus:ring-indigo-500">
                         <option value="Akademik" {{ $tugas['kategori'] == 'Akademik' ? 'selected' : '' }}>Akademik</option>
-                        <option value="Organisasi" {{ $tugas['kategori'] == 'Organisasi' ? 'selected' : '' }}>Proyek Kelompok</option>
+                        <option value="Organisasi" {{ $tugas['kategori'] == 'Organisasi' ? 'selected' : '' }}>Organisasi</option>
 
 
 
