@@ -32,17 +32,23 @@
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col relative antialiased selection:bg-indigo-500 selection:text-white text-slate-800">
+    <!-- Animated Glassmorphism Background -->
+    <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-slate-50/50">
+        <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-purple-400/20 blur-[120px] animate-[pulse_8s_ease-in-out_infinite]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-indigo-400/20 blur-[120px] animate-[pulse_10s_ease-in-out_infinite_reverse]"></div>
+        <div class="absolute top-[20%] right-[10%] w-[40vw] h-[40vw] rounded-full bg-pink-400/20 blur-[100px] animate-[pulse_12s_ease-in-out_infinite]"></div>
+    </div>
 
-   <nav class="bg-white border-b border-slate-100 px-8 py-4 flex justify-between items-center sticky top-0 z-50">
+   <nav class="bg-white/60 backdrop-blur-2xl border-b border-white/50 shadow-[0_4px_30px_rgba(0,0,0,0.03)] px-8 py-4 flex justify-between items-center sticky top-0 z-50 transition-all duration-500">
     <!-- Logo & Nama App di app.blade.php -->
-<a href="/dashboard" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
-    <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold shadow-lg shadow-indigo-100">✓</div>
-    <span class="font-extrabold text-slate-800 text-xl tracking-tight">TaskFlow</span>
+<a href="/dashboard" class="flex items-center gap-3 hover:opacity-80 transition-all group">
+    <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold shadow-lg shadow-indigo-200 group-hover:scale-105 transition-transform">✓</div>
+    <span class="font-black text-slate-800 text-2xl tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-slate-500">TaskFlow</span>
 </a>
     
     {{-- LOGIKA BARU: Cuma muncul kalau sudah login --}}
-    @auth
+    @if(Auth::check())
     <div class="flex items-center gap-6">
         <div class="hidden md:flex gap-8 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
             <a href="/dashboard" class="hover:text-indigo-600 transition">Dashboard</a>
@@ -51,16 +57,16 @@
 
         <div class="flex items-center gap-4 border-l border-slate-100 pl-6">
             <div class="text-right hidden sm:block">
-                <p class="text-[10px] text-slate-400 uppercase font-black tracking-tighter">Halo,</p>
-                <p class="text-sm font-bold text-slate-700 italic">Rotua Paulina</p>
+                <p class="text-[10px] text-slate-400 uppercase font-black tracking-[0.2em] mb-0.5">Halo,</p>
+                <p class="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">{{ Auth::user()->name }}</p>
             </div>
             
-            <a href="/profile" class="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center text-white font-extrabold shadow-lg shadow-indigo-200 hover:scale-110 transition-all cursor-pointer border-2 border-white">
-                RP
+            <a href="/profile" class="w-11 h-11 bg-gradient-to-tr from-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-white font-extrabold shadow-lg shadow-indigo-200 hover:scale-110 hover:rotate-3 transition-all cursor-pointer border-2 border-white/50 backdrop-blur-md">
+                {{ substr(preg_replace('/[^A-Z]/', '', ucwords(Auth::user()->name)), 0, 2) ?: 'U' }}
             </a>
         </div>
     </div>
-    @endauth
+    @endif
 </nav>
 
     <!-- Main Content Area dengan Animasi -->
@@ -70,7 +76,7 @@
     </main>
 
  
-<footer class="bg-white border-t border-slate-50 px-8 py-6">
+<footer class="bg-white/40 backdrop-blur-xl border-t border-white/50 px-8 py-6 mt-auto">
     <div class="max-w-6xl mx-auto flex justify-between items-center">
         
         <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">

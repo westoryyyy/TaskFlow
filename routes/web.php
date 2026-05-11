@@ -1,76 +1,37 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TugasController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+// Auth Routes
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('/register', [AuthController::class, 'showRegister']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/login', function () {
-    return view('auth.login');
-});
+// Protected Routes
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [TugasController::class, 'dashboard'])->name('dashboard');
 
-Route::get('/register', function () {
-    return view('auth.register');
-});
+    Route::get('/tugas/create', [TugasController::class, 'create']);
+    Route::post('/tugas/store', [TugasController::class, 'store']);
+    Route::get('/tugas/{id}', [TugasController::class, 'show']);
+    Route::get('/tugas/{id}/edit', [TugasController::class, 'edit']);
+    Route::post('/tugas/{id}/update', [TugasController::class, 'update']);
+    Route::post('/tugas/{id}/selesai', [TugasController::class, 'selesai']);
 
+    Route::get('/categories', [KategoriController::class, 'index']);
+    Route::post('/categories/store', [KategoriController::class, 'store']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
-
-
-Route::get('/tugas/create', function () {
-    return view('tugas.create');
-});
-
-Route::get('/tugas/detail', function () {
-    return view('tugas.show');
-});
-
-
-Route::get('/categories', function () {
-    $categories = [
-        ['nama' => 'Akademik', 'jumlah' => 5, 'color' => 'indigo'],
-        ['nama' => 'Organisasi', 'jumlah' => 3, 'color' => 'amber'],
-        ['nama' => 'Personal', 'jumlah' => 4, 'color' => 'emerald'],
-    ];
-    return view('categories.index', compact('categories'));
-});
-
-Route::get('/profile', function () {
-    return view('profile.index');
-});
-
-use Illuminate\Support\Facades\Auth;
-
-Route::post('/tugas/selesai', function () {
-    $name = Auth::user() ? Auth::user()->nama : "Paw"; 
-    
-    return redirect()->back()->with('success', "Mantap $name! Tugas berhasil diselesaikan.");
-});
-
-
-Route::get('/tugas/edit', function () {
-    return view('tugas.create'); 
-});
-
-Route::get('/tugas/edit', function () {
-    $tugas = [
-        'judul' => 'ERD Project Reminder',
-        'deskripsi' => 'Membuat struktur database menggunakan Entity Relationship Diagram untuk sistem reminder deadline tugas mahasiswa. Pastikan semua relasi (1:N) sudah terpetakan dengan benar sesuai modul kuliah.',
-        'deadline' => '2026-05-07',
-        'kategori' => 'Akademik'
-    ];
-
-    return view('tugas.edit', compact('tugas'));
-});
-
-use Illuminate\Http\Request;
-
-Route::post('/tugas/update', function (Request $request) {
-    // Karena ini masih dummy, kita langsung kembalikan ke halaman sebelumnya
-    return redirect('/tugas/detail')->with('success', 'Perubahan berhasil disimpan, Paw!');
+    Route::get('/profile', [ProfileController::class, 'index']);
+    Route::get('/profile/edit', [ProfileController::class, 'edit']);
+    Route::post('/profile/update', [ProfileController::class, 'update']);
 });

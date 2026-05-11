@@ -9,24 +9,26 @@
             <h2 class="text-3xl font-extrabold text-slate-800 tracking-tight">Ringkasan Tugas</h2>
             <p class="text-slate-500 mt-1 font-medium text-sm">Pantau semua deadline dan selesaikan tepat waktu.</p>
         </div>
-        <a href="/tugas/create" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg shadow-indigo-100 active:scale-95 flex items-center gap-2">
+        <a href="/tugas/create" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white px-7 py-3.5 rounded-2xl font-bold transition-all duration-300 shadow-[0_10px_20px_-10px_rgba(99,102,241,0.6)] hover:shadow-[0_15px_25px_-10px_rgba(99,102,241,0.8)] hover:-translate-y-0.5 active:scale-95 flex items-center gap-2 border border-white/20">
             <span>+ Tambah Tugas Baru</span>
         </a>
     </div>
 
-    <!-- Quick Stats Card (Ref: Konsep Awal) -->
+    <!-- Quick Stats Card -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-        <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm">
+        <div class="bg-white/60 backdrop-blur-xl p-8 rounded-[2rem] border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all hover:-translate-y-1">
             <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-2">Total Tugas</p>
-            <h4 class="text-3xl font-black text-slate-800">12</h4>
+            <h4 class="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-800 to-slate-500">12</h4>
         </div>
-        <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm">
-            <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-2">Mendekati Deadline</p>
-            <h4 class="text-3xl font-black text-indigo-600">03</h4>
+        <div class="bg-white/60 backdrop-blur-xl p-8 rounded-[2rem] border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all hover:-translate-y-1 relative overflow-hidden">
+            <div class="absolute -right-6 -top-6 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl"></div>
+            <p class="text-[10px] font-extrabold text-indigo-400 uppercase tracking-widest mb-2">Mendekati Deadline</p>
+            <h4 class="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">03</h4>
         </div>
-        <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm">
-            <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-2">Selesai</p>
-            <h4 class="text-3xl font-black text-emerald-500">09</h4>
+        <div class="bg-white/60 backdrop-blur-xl p-8 rounded-[2rem] border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all hover:-translate-y-1 relative overflow-hidden">
+            <div class="absolute -right-6 -top-6 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl"></div>
+            <p class="text-[10px] font-extrabold text-emerald-500 uppercase tracking-widest mb-2">Selesai</p>
+            <h4 class="text-4xl font-black text-emerald-500">09</h4>
         </div>
     </div>
 
@@ -38,32 +40,36 @@
         </h3>
 
         <div class="grid gap-4">
-            {{-- Loop Tugas (Dummy Data buat Front-End) --}}
-           @forelse(['ERD Project', 'Laporan Praktikum', 'UI Design'] as $tugas)
-<a href="/tugas/detail" class="bg-white p-6 rounded-3xl border border-slate-100 flex justify-between items-center hover:shadow-xl hover:shadow-slate-200/40 transition-all duration-300 group cursor-pointer block">
+            {{-- Loop Tugas (Database) --}}
+           @forelse($tugasList as $tugas)
+<a href="/tugas/{{ $tugas->id }}" class="bg-white/60 backdrop-blur-xl p-6 rounded-3xl border border-white/80 flex justify-between items-center shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_10px_40px_rgba(99,102,241,0.1)] hover:border-indigo-100 transition-all duration-500 group cursor-pointer hover:-translate-y-1 block">
     <div class="flex gap-6 items-center">
-        <div class="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-2xl group-hover:bg-indigo-50 transition-colors">
+        <div class="w-14 h-14 bg-gradient-to-br from-slate-100 to-slate-50 rounded-2xl flex items-center justify-center text-2xl group-hover:from-indigo-100 group-hover:to-purple-50 group-hover:scale-110 transition-all duration-300 shadow-inner border border-white">
             {{ $loop->first ? '🔥' : '📝' }}
         </div>
         <div>
-            <h4 class="font-extrabold text-slate-800 text-lg group-hover:text-indigo-600 transition-colors">{{ $tugas }}</h4>
+            <h4 class="font-extrabold text-slate-800 text-lg group-hover:text-indigo-600 transition-colors">{{ $tugas->judul }}</h4>
             <div class="flex flex-wrap gap-4 mt-1 text-xs font-bold uppercase tracking-wider">
-                <span class="text-red-500">Deadline: 07 Mei 2026</span>
+                <span class="text-red-500 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span> Deadline: {{ $tugas->deadline ? \Carbon\Carbon::parse($tugas->deadline)->translatedFormat('d M Y') : '-' }}</span>
                 <span class="text-slate-300 font-normal">|</span>
-                <span class="text-slate-400">Akademik</span>
+                <span class="text-slate-400">{{ $tugas->kategori ? $tugas->kategori->nama : 'Umum' }}</span>
             </div>
         </div>
     </div>
     
     <div class="flex items-center gap-4">
-        <span class="hidden md:block text-[10px] bg-emerald-50 text-emerald-600 px-3 py-1 rounded-full font-bold">Reminder Aktif</span>
-        <div class="w-8 h-8 rounded-full border-2 border-slate-100 flex items-center justify-center text-slate-300 group-hover:border-indigo-600 group-hover:text-indigo-600 transition-all">
+        @if($tugas->waktu_reminder)
+        <span class="hidden md:block text-[10px] bg-gradient-to-r from-emerald-50 to-teal-50 text-emerald-600 px-4 py-1.5 rounded-full font-bold border border-emerald-100">Reminder Aktif</span>
+        @endif
+        <div class="w-10 h-10 rounded-full bg-white border border-slate-100 flex items-center justify-center text-slate-300 group-hover:border-indigo-200 group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-all shadow-sm">
             ✓
         </div>
     </div>
 </a>
 @empty
-    {{-- Kode jika kosong --}}
+    <div class="text-center p-10 bg-white/50 backdrop-blur-md rounded-3xl border border-white/60">
+        <p class="text-slate-400 font-bold mb-4">Belum ada tugas saat ini. Santai dulu! ☕️</p>
+    </div>
 @endforelse
 
         </div>
