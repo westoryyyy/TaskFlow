@@ -3,7 +3,7 @@
 @section('content')
 <div class="max-w-4xl mx-auto py-12 px-4">
     <h1 class="text-3xl font-black text-slate-800 mb-2">Edit Tugas</h1>
-    <p class="text-slate-400 font-medium mb-10">Perbarui detail tugasmu agar tetap relevan.</p>
+    <p class="text-slate-400 font-medium mb-10">Perbarui detail tugasmu.</p>
 
     <div class="bg-white rounded-[2.5rem] p-10 shadow-xl shadow-slate-100 border border-slate-100">
         <form action="/tugas/update" method="POST" class="space-y-8">
