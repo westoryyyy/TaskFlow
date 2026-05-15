@@ -19,7 +19,7 @@
             <div class="space-y-6">
                 <div class="space-y-2">
                     <label class="text-xs font-extrabold text-slate-700 uppercase tracking-wider ml-1">Judul Tugas</label>
-                    <input type="text" name="judul_tugas" placeholder="Contoh: Laporan Praktikum Pemrogramman Web" 
+                    <input type="text" name="judul" placeholder="Contoh: Laporan Praktikum Pemrogramman Web" 
                         class="w-full bg-white/50 backdrop-blur-sm border border-white/60 rounded-2xl p-4 text-sm focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 focus:shadow-[0_0_15px_rgba(99,102,241,0.15)] outline-none transition-all">
                 </div>
 
@@ -34,12 +34,12 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="space-y-2">
                     <label class="text-xs font-extrabold text-slate-700 uppercase tracking-wider ml-1">Tanggal Deadline</label>
-                    <input type="date" name="tanggal_deadline" 
+                    <input type="date" name="deadline" 
                         class="w-full bg-white/50 backdrop-blur-sm border border-white/60 rounded-2xl p-4 text-sm focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 focus:shadow-[0_0_15px_rgba(99,102,241,0.15)] outline-none transition-all">
                 </div>
                 <div class="space-y-2">
                     <label class="text-xs font-extrabold text-slate-700 uppercase tracking-wider ml-1">Kategori Tugas</label>
-                    <select name="id_kategori" class="w-full bg-white/50 backdrop-blur-sm border border-white/60 rounded-2xl p-4 text-sm focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 focus:shadow-[0_0_15px_rgba(99,102,241,0.15)] outline-none transition-all appearance-none">
+                    <select name="kategori_id" class="w-full bg-white/50 backdrop-blur-sm border border-white/60 rounded-2xl p-4 text-sm focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 focus:shadow-[0_0_15px_rgba(99,102,241,0.15)] outline-none transition-all appearance-none">
                         <option value="">Pilih Kategori</option>
                         @foreach($kategoris as $kat)
                         <option value="{{ $kat->id }}">{{ $kat->nama }}</option>

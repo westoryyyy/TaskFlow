@@ -27,9 +27,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/tugas/{id}/edit', [TugasController::class, 'edit']);
     Route::post('/tugas/{id}/update', [TugasController::class, 'update']);
     Route::post('/tugas/{id}/selesai', [TugasController::class, 'selesai']);
+    Route::delete('/tugas/{id}', [TugasController::class, 'destroy']);
 
     Route::get('/categories', [KategoriController::class, 'index']);
     Route::post('/categories/store', [KategoriController::class, 'store']);
+    Route::delete('/categories/{id}', [KategoriController::class, 'destroy']);
 
     Route::get('/profile', [ProfileController::class, 'index']);
     Route::get('/profile/edit', [ProfileController::class, 'edit']);

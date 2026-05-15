@@ -30,9 +30,12 @@
 
                 <div class="space-y-2">
                     <label class="text-[10px] font-black uppercase tracking-widest text-slate-400">Kategori Tugas</label>
-                    <select name="kategori" class="w-full bg-white/50 backdrop-blur-sm border border-white/60 rounded-2xl p-4 font-bold text-slate-700 focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 focus:shadow-[0_0_15px_rgba(99,102,241,0.15)] outline-none transition-all appearance-none">
-                        <option value="Akademik" {{ $tugas['kategori'] == 'Akademik' ? 'selected' : '' }}>Akademik</option>
-                        <option value="Organisasi" {{ $tugas['kategori'] == 'Organisasi' ? 'selected' : '' }}>Organisasi</option>
+                    <select name="kategori_id" class="w-full bg-white/50 backdrop-blur-sm border border-white/60 rounded-2xl p-4 font-bold text-slate-700 focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 focus:shadow-[0_0_15px_rgba(99,102,241,0.15)] outline-none transition-all appearance-none">
+                        @foreach($kategoris as $kat)
+                        <option value="{{ $kat->id }}" {{ $tugas->kategori_id == $kat->id ? 'selected' : '' }}>
+                            {{ $kat->nama }}
+                        </option>
+                        @endforeach
 
 
 
@@ -56,6 +59,22 @@
 
 
 
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-400">Waktu Reminder</label>
+                    <input type="date" name="waktu_reminder" value="{{ $tugas->waktu_reminder ? \Carbon\Carbon::parse($tugas->waktu_reminder)->format('Y-m-d') : '' }}" 
+                           class="w-full bg-white/50 backdrop-blur-sm border border-white/60 rounded-2xl p-4 font-bold text-slate-700 focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 focus:shadow-[0_0_15px_rgba(99,102,241,0.15)] outline-none transition-all">
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-400">Status Reminder</label>
+                    <select name="status_aktif" class="w-full bg-white/50 backdrop-blur-sm border border-white/60 rounded-2xl p-4 font-bold text-indigo-600 focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 outline-none transition-all appearance-none text-indigo-600 font-bold">
+                        <option value="aktif" {{ $tugas->status_aktif == 'aktif' ? 'selected' : '' }}>Aktif</option>
+                        <option value="nonaktif" {{ $tugas->status_aktif == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
                     </select>
                 </div>
             </div>

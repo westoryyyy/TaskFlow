@@ -10,7 +10,8 @@ class TugasController extends Controller
 {
     public function dashboard()
     {
-        $totalTugas = Tugas::count();
+        // Total tugas yang aktif (belum selesai)
+        $totalTugas = Tugas::where('is_selesai', false)->count();
         $selesai = Tugas::where('is_selesai', true)->count();
         $mendekatiDeadline = Tugas::where('is_selesai', false)
             ->whereNotNull('deadline')
@@ -22,7 +23,14 @@ class TugasController extends Controller
             ->orderBy('deadline', 'asc')
             ->get();
 
-        return view('dashboard', compact('totalTugas', 'selesai', 'mendekatiDeadline', 'tugasList'));
+        // Ambil riwayat tugas yang sudah selesai (limit 5 terbaru)
+        $tugasSelesaiList = Tugas::with('kategori')
+            ->where('is_selesai', true)
+            ->orderBy('updated_at', 'desc')
+            ->limit(5)
+            ->get();
+
+        return view('dashboard', compact('totalTugas', 'selesai', 'mendekatiDeadline', 'tugasList', 'tugasSelesaiList'));
     }
 
     public function create()
@@ -34,15 +42,17 @@ class TugasController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'judul_tugas' => 'required|string|max:255',
-            'id_kategori' => 'required|exists:kategoris,id',
+            'judul' => 'required|string|max:255',
+            'kategori_id' => 'required|exists:kategoris,id',
+            'deadline' => 'nullable|date',
+            'waktu_reminder' => 'nullable|date',
         ]);
 
         Tugas::create([
-            'judul' => $request->judul_tugas,
+            'judul' => $request->judul,
             'deskripsi' => $request->deskripsi,
-            'deadline' => $request->tanggal_deadline,
-            'kategori_id' => $request->id_kategori,
+            'deadline' => $request->deadline,
+            'kategori_id' => $request->kategori_id,
             'waktu_reminder' => $request->waktu_reminder,
             'status_aktif' => $request->status_aktif ?? 'aktif',
             'is_selesai' => false,
@@ -66,13 +76,22 @@ class TugasController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'judul' => 'required|string|max:255',
+            'kategori_id' => 'required|exists:kategoris,id',
+            'deadline' => 'nullable|date',
+            'waktu_reminder' => 'nullable|date',
+        ]);
+
         $tugas = Tugas::findOrFail($id);
         
         $tugas->update([
             'judul' => $request->judul,
             'deskripsi' => $request->deskripsi,
             'deadline' => $request->deadline,
-            'kategori_id' => $request->kategori,
+            'kategori_id' => $request->kategori_id,
+            'waktu_reminder' => $request->waktu_reminder,
+            'status_aktif' => $request->status_aktif,
         ]);
 
         return redirect("/tugas/$id")->with('success', 'Perubahan berhasil disimpan, Paw!');
@@ -84,5 +103,13 @@ class TugasController extends Controller
         $tugas->update(['is_selesai' => true]);
         
         return redirect('/dashboard')->with('success', 'Mantap! Tugas berhasil diselesaikan.');
+    }
+
+    public function destroy($id)
+    {
+        $tugas = Tugas::findOrFail($id);
+        $tugas->delete();
+
+        return redirect('/dashboard')->with('success', 'Tugas berhasil dihapus.');
     }
 }

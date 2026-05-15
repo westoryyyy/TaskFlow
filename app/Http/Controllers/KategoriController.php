@@ -28,4 +28,12 @@ class KategoriController extends Controller
 
         return redirect()->back()->with('success', 'Kategori berhasil ditambahkan!');
     }
+
+    public function destroy($id)
+    {
+        $category = Kategori::findOrFail($id);
+        $category->delete();
+
+        return redirect()->back()->with('success', 'Kategori berhasil dihapus!');
+    }
 }

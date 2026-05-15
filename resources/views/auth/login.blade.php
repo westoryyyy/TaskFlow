@@ -20,7 +20,7 @@
                 @enderror
             </div>
 
-            {{-- Menggunakan entitas password dari ERD[cite: 2] --}}
+            {{-- Menggunakan entitas password dari ERD --}}
             <div class="space-y-1">
                 <div class="flex justify-between items-center px-1">
                     <label class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Password</label>

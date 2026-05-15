@@ -18,17 +18,17 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
         <div class="bg-white/60 backdrop-blur-xl p-8 rounded-[2rem] border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all hover:-translate-y-1">
             <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-2">Total Tugas</p>
-            <h4 class="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-800 to-slate-500">12</h4>
+            <h4 class="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-800 to-slate-500">{{ $totalTugas }}</h4>
         </div>
         <div class="bg-white/60 backdrop-blur-xl p-8 rounded-[2rem] border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all hover:-translate-y-1 relative overflow-hidden">
             <div class="absolute -right-6 -top-6 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl"></div>
             <p class="text-[10px] font-extrabold text-indigo-400 uppercase tracking-widest mb-2">Mendekati Deadline</p>
-            <h4 class="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">03</h4>
+            <h4 class="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">{{ sprintf('%02d', $mendekatiDeadline) }}</h4>
         </div>
         <div class="bg-white/60 backdrop-blur-xl p-8 rounded-[2rem] border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all hover:-translate-y-1 relative overflow-hidden">
             <div class="absolute -right-6 -top-6 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl"></div>
             <p class="text-[10px] font-extrabold text-emerald-500 uppercase tracking-widest mb-2">Selesai</p>
-            <h4 class="text-4xl font-black text-emerald-500">09</h4>
+            <h4 class="text-4xl font-black text-emerald-500">{{ sprintf('%02d', $selesai) }}</h4>
         </div>
     </div>
 
@@ -72,6 +72,31 @@
     </div>
 @endforelse
 
+        </div>
+    </div>
+
+    <!-- Riwayat Tugas Selesai (Tambahan) -->
+    <div class="mt-20 space-y-6">
+        <h3 class="text-xl font-extrabold text-slate-800 flex items-center gap-2 opacity-50">
+            <span class="w-2 h-6 bg-emerald-500 rounded-full"></span>
+            Riwayat Tugas Selesai
+        </h3>
+        
+        <div class="grid gap-3 opacity-60">
+            @forelse($tugasSelesaiList as $tSelesai)
+            <div class="bg-white/40 backdrop-blur-md p-5 rounded-2xl border border-white/60 flex justify-between items-center shadow-sm">
+                <div class="flex gap-4 items-center">
+                    <div class="text-xl">✅</div>
+                    <div>
+                        <h4 class="font-bold text-slate-600 line-through">{{ $tSelesai->judul }}</h4>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{{ $tSelesai->kategori ? $tSelesai->kategori->nama : 'Umum' }}</p>
+                    </div>
+                </div>
+                <div class="text-[10px] font-black text-emerald-500 uppercase">Selesai</div>
+            </div>
+            @empty
+            <p class="text-slate-400 text-xs italic">Belum ada riwayat tugas selesai.</p>
+            @endforelse
         </div>
     </div>
 </div>

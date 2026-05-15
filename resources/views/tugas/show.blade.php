@@ -42,12 +42,26 @@
                             Edit
                         </a>
 
+                        <form action="/tugas/{{ $tugas->id }}" method="POST" onsubmit="return confirm('Yakin mau hapus tugas ini?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="px-8 py-3 bg-white/50 text-red-500 rounded-2xl font-bold hover:bg-red-50 transition-all text-sm border border-white/60 shadow-sm">
+                                Hapus
+                            </button>
+                        </form>
+
+                        @if(!$tugas->is_selesai)
                         <form action="/tugas/{{ $tugas->id }}/selesai" method="POST">
                             @csrf
                             <button type="submit" class="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-2xl font-bold shadow-[0_10px_20px_-10px_rgba(99,102,241,0.6)] hover:shadow-[0_15px_25px_-10px_rgba(99,102,241,0.8)] hover:-translate-y-0.5 transition-all text-sm active:scale-95 border border-white/20">
                                 Selesai
                             </button>
                         </form>
+                        @else
+                        <div class="px-8 py-3 bg-emerald-50 text-emerald-600 rounded-2xl font-bold border border-emerald-100 flex items-center gap-2 shadow-sm">
+                            <span class="text-lg">✓</span> Tugas Selesai
+                        </div>
+                        @endif
                     </div>
                 </div>
 
