@@ -8,8 +8,13 @@ use Illuminate\Http\Request;
 
 class TugasController extends Controller
 {
-    public function dashboard()
+    public function dashboard(Request $request)
     {
+        //check user yang login, display data punya user yang login aja, bukan semua
+        // $userId = auth()->id(); coba bikin helper biar bisa diimplement kaya gini
+        // ubah query tugas jadi filter berdasarkan user_id yang login, jadi tugas yang ditampilkan hanya tugas milik user yang login
+        // buat migration baru buat nambahin user_id di kolom tugas, terus update model Tugas buat relasi ke User, terus update controller buat filter berdasarkan user_id yang login
+
         // Total tugas yang aktif (belum selesai)
         $totalTugas = Tugas::where('is_selesai', false)->count();
         $selesai = Tugas::where('is_selesai', true)->count();
