@@ -14,6 +14,7 @@ class Tugas extends Model
         'waktu_reminder',
         'status_aktif',
         'is_selesai',
+        'user_id',
     ];
 
     protected $casts = [
@@ -25,5 +26,10 @@ class Tugas extends Model
     public function kategori()
     {
         return $this->belongsTo(Kategori::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

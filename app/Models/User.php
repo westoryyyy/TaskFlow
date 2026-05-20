@@ -37,4 +37,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function tugas()
+    {
+        return $this->hasMany(Tugas::class);
+    }
 }
