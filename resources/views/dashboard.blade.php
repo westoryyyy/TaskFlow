@@ -98,6 +98,11 @@
             <p class="text-slate-400 text-xs italic">Belum ada riwayat tugas selesai.</p>
             @endforelse
         </div>
+        @if($tugasSelesaiList->hasPages())
+            <div class="mt-8 flex justify-center">
+                {{ $tugasSelesaiList->links() }}
+            </div>
+        @endif
     </div>
 </div>
 @endsection

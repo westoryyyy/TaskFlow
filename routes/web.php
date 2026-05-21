@@ -21,19 +21,28 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [TugasController::class, 'dashboard'])->name('dashboard');
 
-    Route::get('/tugas/create', [TugasController::class, 'create']);
-    Route::post('/tugas/store', [TugasController::class, 'store']);
-    Route::get('/tugas/{id}', [TugasController::class, 'show']);
-    Route::get('/tugas/{id}/edit', [TugasController::class, 'edit']);
-    Route::post('/tugas/{id}/update', [TugasController::class, 'update']);
-    Route::post('/tugas/{id}/selesai', [TugasController::class, 'selesai']);
-    Route::delete('/tugas/{id}', [TugasController::class, 'destroy']);
+    // Tugas Group
+    Route::prefix('tugas')->name('tugas.')->group(function () {
+        Route::get('/create', [TugasController::class, 'create'])->name('create');
+        Route::post('/store', [TugasController::class, 'store'])->name('store');
+        Route::get('/{id}', [TugasController::class, 'show'])->name('show');
+        Route::get('/{id}/edit', [TugasController::class, 'edit'])->name('edit');
+        Route::post('/{id}/update', [TugasController::class, 'update'])->name('update');
+        Route::post('/{id}/selesai', [TugasController::class, 'selesai'])->name('selesai');
+        Route::delete('/{id}', [TugasController::class, 'destroy'])->name('destroy');
+    });
 
-    Route::get('/categories', [KategoriController::class, 'index']);
-    Route::post('/categories/store', [KategoriController::class, 'store']);
-    Route::delete('/categories/{id}', [KategoriController::class, 'destroy']);
+    // Categories Group
+    Route::prefix('categories')->name('categories.')->group(function () {
+        Route::get('/', [KategoriController::class, 'index'])->name('index');
+        Route::post('/store', [KategoriController::class, 'store'])->name('store');
+        Route::delete('/{id}', [KategoriController::class, 'destroy'])->name('destroy');
+    });
 
-    Route::get('/profile', [ProfileController::class, 'index']);
-    Route::get('/profile/edit', [ProfileController::class, 'edit']);
-    Route::post('/profile/update', [ProfileController::class, 'update']);
+    // Profile Group
+    Route::prefix('profile')->name('profile.')->group(function () {
+        Route::get('/', [ProfileController::class, 'index'])->name('index');
+        Route::get('/edit', [ProfileController::class, 'edit'])->name('edit');
+        Route::post('/update', [ProfileController::class, 'update'])->name('update');
+    });
 });
