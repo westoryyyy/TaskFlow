@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
 
 class AuthController extends Controller
 {
@@ -51,6 +52,8 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             'status_akademik' => 'Mahasiswa Baru',
         ]);
+
+        event(new Registered($user));
 
         Auth::login($user);
 
